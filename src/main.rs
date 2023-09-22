@@ -1,3 +1,4 @@
+pub mod fetch_market_event;
 pub mod grpc;
 pub mod place_order;
 pub mod sample;
@@ -5,6 +6,7 @@ pub mod sample_market_maker;
 pub mod utils;
 pub mod view_state_order_book;
 
+use fetch_market_event::FetchMarketEvent;
 use grpc::Grpc;
 use place_order::PlaceOrder;
 use sample::Sample;
@@ -25,6 +27,8 @@ pub enum Command {
     SampleMarketMaker(SampleMarketMaker),
     #[structopt(name = "view-state-order-book")]
     ViewStateOrderBook(ViewStateOrderBook),
+    #[structopt(name = "fetch-market-event")]
+    FetchMarketEvent(FetchMarketEvent),
 }
 
 #[derive(Debug, StructOpt)]
@@ -45,6 +49,7 @@ impl PhoneixMMCli {
             Command::Sample(sample) => sample.run().await,
             Command::SampleMarketMaker(sample_market_maker) => sample_market_maker.run().await,
             Command::ViewStateOrderBook(view_state_order_book) => view_state_order_book.run().await,
+            Command::FetchMarketEvent(fetch_market_event) => fetch_market_event.run().await,
         }
     }
 }
