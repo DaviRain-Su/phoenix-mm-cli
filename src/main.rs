@@ -2,6 +2,8 @@ pub mod grpc;
 pub mod place_order;
 pub mod sample;
 pub mod sample_market_maker;
+pub mod utils;
+pub mod view_state_order_book;
 
 use grpc::Grpc;
 use place_order::PlaceOrder;

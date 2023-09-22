@@ -1,4 +1,5 @@
-use anyhow::anyhow;
+use crate::utils::get_payer_keypair;
+
 use ellipsis_client::EllipsisClient;
 use phoenix::program::accounts::MarketHeader;
 use phoenix::program::dispatch_market::load_with_dispatch;
@@ -13,9 +14,6 @@ use solana_client::rpc_filter::RpcFilterType;
 use solana_program::keccak;
 use solana_program::pubkey::Pubkey;
 use solana_sdk::commitment_config::CommitmentConfig;
-use solana_sdk::signature::read_keypair_file;
-use solana_sdk::signature::Keypair;
-use std::env;
 use std::mem::size_of;
 use structopt::StructOpt;
 
@@ -31,15 +29,6 @@ fn get_discriminant(type_name: &str) -> u64 {
             .try_into()
             .unwrap(),
     )
-}
-
-fn get_payer_keypair() -> solana_sdk::signer::keypair::Keypair {
-    match env::var("PAYER").is_ok() {
-        true => Keypair::from_base58_string(&env::var("PAYER").expect("$PAYER is not set")[..]),
-        false => read_keypair_file(&*shellexpand::tilde("~/.config/solana/id.json"))
-            .map_err(|e| anyhow!(e.to_string()))
-            .unwrap(),
-    }
 }
 
 /// Sample code for getting market data from the blockchain (devnet)
