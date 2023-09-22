@@ -158,6 +158,7 @@ async fn cancel_and_place_quotes(
     let cancel_all_ix = sdk.get_cancel_all_ix(market)?;
     let mut ixs = vec![cancel_all_ix];
 
+    // todo change to pyth sol price
     let fair_price = {
         let response = reqwest::get(format!(
             "https://api.coinbase.com/v2/prices/{}/spot",
