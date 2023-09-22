@@ -9,6 +9,7 @@ use grpc::Grpc;
 use place_order::PlaceOrder;
 use sample::Sample;
 use sample_market_maker::SampleMarketMaker;
+use view_state_order_book::ViewStateOrderBook;
 
 use structopt::StructOpt;
 
@@ -22,6 +23,8 @@ pub enum Command {
     Sample(Sample),
     #[structopt(name = "sample-market-maker")]
     SampleMarketMaker(SampleMarketMaker),
+    #[structopt(name = "view-state-order-book")]
+    ViewStateOrderBook(ViewStateOrderBook),
 }
 
 #[derive(Debug, StructOpt)]
@@ -41,6 +44,7 @@ impl PhoneixMMCli {
             }
             Command::Sample(sample) => sample.run().await,
             Command::SampleMarketMaker(sample_market_maker) => sample_market_maker.run().await,
+            Command::ViewStateOrderBook(view_state_order_book) => view_state_order_book.run().await,
         }
     }
 }
