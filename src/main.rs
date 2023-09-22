@@ -1,19 +1,9 @@
-pub mod fetch_market_event;
-pub mod grpc;
-pub mod place_order;
-pub mod sample;
-pub mod sample_market_maker;
-pub mod utils;
-pub mod view_state_order_book;
-
-use fetch_market_event::FetchMarketEvent;
-use grpc::Grpc;
-use place_order::PlaceOrder;
-use sample::Sample;
-use sample_market_maker::SampleMarketMaker;
-use view_state_order_book::ViewStateOrderBook;
-
 use structopt::StructOpt;
+
+pub mod command;
+pub mod utils;
+
+use command::*;
 
 #[derive(Debug, StructOpt)]
 pub enum Command {
